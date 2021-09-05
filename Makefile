@@ -16,7 +16,8 @@ vcd:
 	@echo "Generating the VDD executable script from Verilog files"
 	@mkdir -p builds/vcd
 	iverilog -Wall -o builds/vcd/top.out top.v top_tb.v \
-		`cat verilog.includes | grep -v "^#" | tr '\012' ' '`
+		`cat verilog.includes | grep -v "^#" | tr '\012' ' '` \
+		`cat verilog_tb.includes | grep -v "^#" | tr '\012' ' '`
 	@echo "Running the top.out file to generate gtkwave file."
 	@(cd builds/vcd; ./top.out)
 

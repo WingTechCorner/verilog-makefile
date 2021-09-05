@@ -4,9 +4,8 @@
 //
 module stimulus;
   reg clk;
-  reg reset;
-  wire[3:0] q;
-  ripple_carry_counter r1(q,clk,reset);
+  wire[7:0] out;
+  hello h1(clk,out);
   integer tally=0;
 
   initial
@@ -22,18 +21,9 @@ module stimulus;
 
   initial
   begin
-     reset = 1'b1;
-     #15 reset = 1'b0;
-     #180 reset = 1'b1;
-     #10 reset = 1'b0;
-  end
-
-  initial
-  begin
     $dumpfile("top_tb.vcd");
-    $dumpvars(0,q);
-    $dumpvars(1,reset);
-    $dumpvars(2,clk);
+    $dumpvars(0,clk);
+    $dumpvars(1,out);
   end
 
 endmodule
