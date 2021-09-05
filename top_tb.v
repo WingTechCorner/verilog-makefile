@@ -15,7 +15,7 @@ module stimulus;
      #5 clk = ~clk;
 
   always @(posedge clk)
-    if ( tally > 100000 )
+    if ( tally > 1000 )
       $finish;
     else
       tally <= tally + 1;
@@ -34,7 +34,6 @@ module stimulus;
     $dumpvars(0,q);
     $dumpvars(1,reset);
     $dumpvars(2,clk);
-    $dumpvars(3,r1);
   end
 
 endmodule

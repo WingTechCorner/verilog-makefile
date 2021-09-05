@@ -6,7 +6,7 @@ default:
 	@echo "ecp5   - Lattice ECP5"
 
 clean:
-	rm -rf *.json *.blif *.edif *.out *.vcd
+	rm -rf *.json *.blif *.edif *.out *.vcd *.values
 
 vcd:
 	@echo "Generating the VDD executable script from Verilog files"
@@ -14,6 +14,11 @@ vcd:
 		`cat verilog.includes | grep -v "^#" | tr '\012' ' '`
 	@echo "Running the top.out file to generate gtkwave file."
 	./top.out
+
+view: vcd
+	@WW=`grep "^#" top_tb.vcd | tail -1 | wc -c`
+	vcdcat top_tb.vcd > top_tb.values
+	./vcdcat_clean_view.py top_tb.values
 
 xc6:
 	#     -family {xcup|xcu|xc7|xc6s}

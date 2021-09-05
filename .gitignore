@@ -3,3 +3,4 @@
 *.blif
 *.edif
 *.json
+*.values
