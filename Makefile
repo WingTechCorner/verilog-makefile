@@ -7,6 +7,8 @@ default:
 
 clean:
 	rm -rf *.json *.blif *.edif *.out *.vcd *.values
+	rm -rf ice40 ecp5 
+	@ls -l
 
 vcd:
 	@echo "Generating the VDD executable script from Verilog files"
@@ -28,8 +30,10 @@ xc6:
 
 ice40:
 	@echo "Generating ICE40 files"
-	yosys -p "synth_ice40 -edif top_ice40.edif -blif top_ice40.blif -json top_ice40.json" top.v `cat verilog.includes | grep -v "^#" | tr '\012' ' '` 
+	@mkdir -p ice40
+	@yosys -p "synth_ice40 -edif ice40/top_ice40.edif -blif ice40/top_ice40.blif -json ice40/top_ice40.json" top.v `cat verilog.includes | grep -v "^#" | tr '\012' ' '` 
 
 ecp5:
 	@echo "Generating ECP5 files"
-	yosys -p "synth_ecp5 -edif top_ecp5.edif -blif top_ecp5.blif -json top_ecp5.json" top.v `cat verilog.includes | grep -v "^#" | tr '\012' ' '` 
+	@mkdir -p ecp5
+	@yosys -p "synth_ecp5 -edif ecp5/top_ecp5.edif -blif ecp5/top_ecp5.blif -json ecp5/top_ecp5.json" top.v `cat verilog.includes | grep -v "^#" | tr '\012' ' '` 
