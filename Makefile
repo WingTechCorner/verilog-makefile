@@ -16,7 +16,7 @@ vcd:
 	iverilog -Wall -o builds/vcd/top.out top.v top_tb.v \
 		`cat verilog.includes | grep -v "^#" | tr '\012' ' '`
 	@echo "Running the top.out file to generate gtkwave file."
-	@./builds/vcd/top.out
+	@(cd builds/vcd; ./top.out)
 
 view: vcd
 	vcdcat builds/vcd/top_tb.vcd > builds/vcd/top_tb.values
