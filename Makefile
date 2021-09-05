@@ -10,6 +10,8 @@ clean:
 	rm -rf builds
 	@ls -l
 
+all: clean vcd xc6 ice40 ecp5
+
 vcd:
 	@echo "Generating the VDD executable script from Verilog files"
 	@mkdir -p builds/vcd
