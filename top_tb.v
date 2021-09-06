@@ -42,10 +42,11 @@ module stimulus;
   begin
     $dumpfile("top_tb.vcd");
     $dumpvars(0,clk);
-    $dumpvars(1,reset);
+    $dumpvars(0,reset);
     $dumpvars(0,in);
     $dumpvars(0,out);
     $dumpvars(0,sigtog);
+    $dumpvars(0,h1.state_current);
   end
 
 endmodule
