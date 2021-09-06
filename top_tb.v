@@ -2,7 +2,7 @@
 `timescale 10ns/1ps
 // Test Stimulus
 //
-module stimulus;
+module sim;
   reg clk,reset,in;
   wire out;
   double_edge_detect h1( .clk(clk), .reset(reset), .in(in), .out(out));
@@ -23,15 +23,16 @@ module stimulus;
 
   always @(posedge clk)
   begin
+    in = 0;
     if ( tally > 1000 )
       $finish;
     else
       tally <= tally + 1;
 
-    if (sigtog == 0 )
+    if (sigtog == 4 )
       in = 1;
-    
-    if (sigtog == 2 )
+
+    if (sigtog == 1 )
       in = 0;
 
     sigtog <= sigtog + 1;
@@ -47,6 +48,8 @@ module stimulus;
     $dumpvars(0,out);
     $dumpvars(0,sigtog);
     $dumpvars(0,h1.state_current);
+    $dumpvars(0,h1.last_in);
+    $dumpvars(0,h1.in);
   end
 
 endmodule
