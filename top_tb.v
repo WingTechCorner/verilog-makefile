@@ -3,9 +3,9 @@
 // Test Stimulus
 //
 module stimulus;
-  reg clk;
-  wire[7:0] out;
-  hello h1(clk,out);
+  reg clk,reset,in;
+  wire out;
+  double_edge_detect h1( .clk(clk), .reset(reset), .in(in), .out(out));
   integer tally=0;
 
   initial
@@ -23,7 +23,9 @@ module stimulus;
   begin
     $dumpfile("top_tb.vcd");
     $dumpvars(0,clk);
-    $dumpvars(1,out);
+    $dumpvars(1,reset);
+    $dumpvars(2,in);
+    $dumpvars(3,out);
   end
 
 endmodule
