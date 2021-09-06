@@ -6,6 +6,7 @@ module double_edge_detect(clk,reset,in,out);
    output out;
    reg out;
    reg [3:0] state_current, state_next;
+   wire clk,in,reset;
    // Different triggered states
    reg [3:0]
       not_triggered = 3'b000,
@@ -18,12 +19,12 @@ module double_edge_detect(clk,reset,in,out);
    always @(reset)
      if ( reset )
        begin
-         out <= 0;
-         state_current  <= not_triggered;
+         out = 0;
+         state_current  = not_triggered;
        end
      else
        begin
-         state_next <= state_current;
+         state_next = state_current;
        end
      
    // Okay, now let's have things change based on the positive edge of the
@@ -34,7 +35,7 @@ module double_edge_detect(clk,reset,in,out);
 
       case( state_current )
         not_triggered:
-          if ( in )
+          if ( in > 0 )
             begin
               state_next = pos_triggered;
               out = 1;
@@ -48,13 +49,13 @@ module double_edge_detect(clk,reset,in,out);
         pos_triggered:
         begin
           state_next = nxt_triggered;
-          out = 1;
+          out = 0;
         end
 
         neg_triggered:
         begin
           state_next = nxt_triggered;
-          out = 1;
+          out = 0;
         end
 
         nxt_triggered:
@@ -62,12 +63,12 @@ module double_edge_detect(clk,reset,in,out);
           state_next = not_triggered;
           out = 0;
         end
-
+/*
         default:
         begin
           state_next = not_triggered;
         end
-
+*/
       endcase
   end
 endmodule
