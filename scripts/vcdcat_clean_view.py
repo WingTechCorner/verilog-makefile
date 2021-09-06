@@ -26,7 +26,7 @@ INDEX_WIDTH=len(DATA[-1].split()[0]) + 2
 for row in DATA:
   if RE_VARLINE.match(row):
     VARCOUNT = VARCOUNT+1;
-    HEADERS.append(str(row.split()[1]))
+    HEADERS.append(  str(row.split()[1]) )
   elif RE_NOTNUMSTART.match(row):
     break
 
@@ -65,9 +65,12 @@ for idx in range(DATA_INDEX_START,len(DATA)):
         hbit_delta=(hbit_left - hbit_right) + 1
       else:
         hbit_delta=(hbit_right - hbit_left) + 1
-      hexvalue = int("0x" + field,16)
-      strvalue = '{:>0' + str(hbit_delta) + 'b}'
-      hexvalue = strvalue.format( hexvalue)
+      if "x" in field:
+        hexvalue="x"
+      else:
+        hexvalue = int(str("0x" + str(field) ),16)
+        strvalue = '{:>0' + str(hbit_delta) + 'b}'
+        hexvalue = strvalue.format( hexvalue)
       FIELDVALUES.append( hexvalue )
     else:
       FIELDVALUES.append( field )

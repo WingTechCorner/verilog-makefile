@@ -63,6 +63,11 @@ module double_edge_detect(clk,reset,in,out);
           out = 0;
         end
 
+        default:
+        begin
+          state_next = not_triggered;
+        end
+
       endcase
   end
 endmodule
