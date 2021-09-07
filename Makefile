@@ -29,8 +29,7 @@ xc6:
 	#     -family {xcup|xcu|xc7|xc6s}
 	@echo "Generating Spartan6 files"
 	@mkdir -p builds/xc6s
-	yosys -p "synth_xilinx -family xc6s -edif builds/xc6s/top.edif -blif builds/xc6s/top.blif" top.v \
-		`cat verilog.includes | grep -v "^#" | tr '\012' ' '` 
+	yosys -p "synth_xilinx -top top -family xc6s -edif builds/xc6s/top.edif -blif builds/xc6s/top.blif -vpr" top.v `cat verilog.includes | grep -v "^#" | tr '\012' ' '` 
 
 ice40:
 	@echo "Generating ICE40 files"
