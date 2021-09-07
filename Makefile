@@ -35,9 +35,12 @@ xc6:
 ice40:
 	@echo "Generating ICE40 files"
 	@mkdir -p builds/ice40
-	@yosys -p "synth_ice40 -edif builds/ice40/top_ice40.edif -blif builds/ice40/top_ice40.blif -json builds/ice40/top_ice40.json" top.v `cat verilog.includes | grep -v "^#" | tr '\012' ' '` 
+	@yosys -p "hierarchy -top double_edge_detect; synth_ice40 -edif builds/ice40/top_ice40.edif -blif builds/ice40/top_ice40.blif -json builds/ice40/top_ice40.json" top.v `cat verilog.includes | grep -v "^#" | tr '\012' ' '` 
+	@nextpnr-ice40 --hx8k --json builds/ice40/top_ice40.json --asc builds/ice40/top_ice40.asc --pcf-allow-unconstrained 
+	@icepack builds/ice40/top_ice40.asc builds/ice40/top_ice40.bin
 
 ecp5:
 	@echo "Generating ECP5 files"
 	@mkdir -p builds/ecp5
-	@yosys -p "synth_ecp5 -edif builds/ecp5/top_ecp5.edif -blif builds/ecp5/top_ecp5.blif -json builds/ecp5/top_ecp5.json" top.v `cat verilog.includes | grep -v "^#" | tr '\012' ' '` 
+	@yosys -p "hierarchy -top double_edge_detect; synth_ecp5 -edif builds/ecp5/top_ecp5.edif -blif builds/ecp5/top_ecp5.blif -json builds/ecp5/top_ecp5.json" top.v `cat verilog.includes | grep -v "^#" | tr '\012' ' '` 
+	@next-

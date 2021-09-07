@@ -1,6 +1,7 @@
 // Definitions
 `timescale 10ns/1ps
 
+
 module double_edge_detect(clk,reset,in,out);
    input clk,in,reset;
    output out;
